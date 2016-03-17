@@ -151,6 +151,7 @@
       }
 
       .page_main {
+        display: block;
         max-width: 1000px;
         border-right: 25px solid transparent;
         border-left: 25px solid transparent;
@@ -163,6 +164,7 @@
         background: #fff;
         overflow: hidden;
         border: 1px solid #A14545;
+        position: relative;
       }
 
       .content_section__header {
@@ -206,8 +208,49 @@
         padding: 5px 0
       }
 
+      .content_section__truth_mode_switch {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -ms-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+      }
+
       .truth {
-        display: none;
+        display: none;  /* everybody lies */
+      }
+
+      span.content_section__article_truth_sign {
+        display: block;
+        height: 15px;
+        content: '';
+        top: 45px;
+        left: 15px;
+        text-decoration: none !important;
+        position: absolute;
+        padding-left: 10px;
+        font-size: 10px;
+        color: #fff;
+        -webkit-transition: color 1s ease;
+        -moz-transition: color 1s ease;
+        -ms-transition: color 1s ease;
+        -o-transition: color 1s ease;
+        transition: color 1s ease;
+      }
+
+      .content_section__truth_mode_switch:checked + .content_section__article_text span.truth {
+        display: inline;
+        color: #555;
+        text-decoration: line-through;   
+      }
+
+      .content_section__truth_mode_switch:checked + .content_section__article_text p.truth {
+        display: block;
+        font-style: italic;
       }
 
       @media only screen and (max-width: 500px) {
@@ -216,6 +259,10 @@
         }
         .content_section__photo_container {
           width: 100%;
+        }
+        .page_main {
+          border-left-width: 15px;
+          border-right-width: 15px;
         }
       }
     </style>
@@ -277,9 +324,11 @@
       </section>
 
       <section id="about" class="content_section">
-        <h2 class="content_section__header">О себе <span class="truth">без прикрас</span></h2>        
+        <h2 class="content_section__header">О себе</h2>
         <article class="content_section__article">
+          <input type="checkbox" class="content_section__truth_mode_switch">
           <div class="content_section__article_text">
+            <span class="content_section__article_truth_sign truth">Активирован режим "чистая правда"</span>
             <p class="content_section__article_paragraph">
               Всем привет! Меня зовут Гена, я начинающий фронтенд разработчик. Я очень хочу поступить в ШРИ в этом году чтобы изучать современные технологии разработки интерфейсов, перенять опыт более квалифицированных специалистов и улучшить свои профессиональные качества<span class="truth">, в идеале - получить работу</span>. Рассказ о себя начну с того как я стал айтишником.
             </p>
@@ -296,7 +345,7 @@
               В свободное от работы время занимаюсь вокалом в студии BlackCat, немного играю на гитаре, очень люблю музыку<span class="truth"> - мало кто видел меня без наушников</span>. Из книг предпочитаю фантастику. В компьютерные игры почти не играю<span class="truth">, потому что быстро перегревается ноут</span>.
             </p>
             <p class="content_section__article_paragraph truth">
-              Надеюсь вам понравился мой "рассказ без прикрас", мне очень хотелось сделать его оригинальным и интересным, хоть для этого и пришлось добавить немного дискредитирующей информации)) Также хотелось бы сказать огромное спасибо за интереснеишие задания - выполняя их я с пользой провел время, узнал много нового и по новому взглянул на то, что уже знал - надеюсь мои решения вас не разочаруют.
+              Надеюсь вам понравился мой "рассказ без прикрас", мне очень хотелось сделать его оригинальным и интересным, хоть для этого и пришлось добавить немного дискредитирующей информации)) Также хотелось бы сказать огромное спасибо за интереснейшие задания - выполняя их я с пользой провел время, узнал много нового и по новому взглянул на то, что уже знал - надеюсь мои решения вас не разочаруют.
             </p>
           </div>
         </article>
@@ -383,6 +432,16 @@
             <a href="/yandex/task-3">Задание 3</a> <a class="git" href="https://github.com/ant478/yandex_task_3">git</a>
           </div>
         </article>
+      </section>
+
+      <section id="truth-mode" class="content_section">
+        <h2 class="content_section__header">P.S.</h2>
+          <article class="content_section__article">
+            <div class="content_section__article_text">
+              <img src="data:image/png;base64,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">
+              <img src="data:image/png;base64,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">
+            </div>
+          </article>
       </section>
   </body>
 </html>
